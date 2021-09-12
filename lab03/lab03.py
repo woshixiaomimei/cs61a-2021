@@ -183,6 +183,6 @@ def protected_secret(password, secret, num_attempts):
         if str(num_attempts) != str(0) and password_attempt!=password:
             num_attempts -= 1
             return "INCORRECT PASSWORD"
-        # Nothing~
+        # Got nothing, see you tomorrow~
         return num_attempts
     return get_secret
