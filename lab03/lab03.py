@@ -90,14 +90,20 @@ def get_k_run_starter(n, k):
     2
     """
     # I don't understand 0_0.
+    """For example, the number 123444345 has four increasing runs: 1234, 4, 4 and 345.
+    Each run can be indexed from the end of the number, starting with index 0.
+    In the example, the 0th run is 345, the first run is 4, the second run is 4 and the third run is 1234.
+    Implement get_k_run_starter, which takes in integers n and k and returns 
+    the 0th digit of the kth increasing run within n. The 0th digit is the leftmost number in the run."""
+    
     i = 0
     final = None
-    while ____________________________:
-        while ____________________________:
-            ____________________________
-        final = ____________________________
-        i = ____________________________
-        n = ____________________________
+    while i <= k:
+        while n > 10 and (n % 10 > (n // 10) % 10):
+            n = n//10
+        final = n % 10
+        i = i + 1
+        n = n // 10
     return final
     
 
@@ -175,14 +181,13 @@ def protected_secret(password, secret, num_attempts):
     """
     def get_secret(password_attempt):
         "*** YOUR CODE HERE ***"
-        nonlocal password, secret, num_attempts
-        if num_attempts == 0:
-            return "SECRET LOCKED"
-        if str(num_attempts) != str(0) and password_attempt==password:
-            return secret
-        if str(num_attempts) != str(0) and password_attempt!=password:
-            num_attempts -= 1
-            return "INCORRECT PASSWORD"
-        # Got nothing, see you tomorrow~
-        return num_attempts
+        if num_attempts <= 0:
+            print("SECRET LOCKED")
+            return protected_secret(password, secret, num_attempts - 1)
+        elif password_attempt == password:
+            print(secret)
+            return protected_secret(password, secret, num_attempts)
+        else:
+            print("INCORRECT PASSWORD")
+            return protected_secret(password, secret, num_attempts - 1)
     return get_secret
